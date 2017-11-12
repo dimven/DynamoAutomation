@@ -19,6 +19,7 @@ namespace DynamoAutomation
 	public class Swallower : IExternalApplication
 	{
 		private static bool journalModeIsPermissive;
+		private static bool journalChecked;
 		private static UIControlledApplication uiCtrlApp;
 		private static EventHandler<DocumentOpeningEventArgs> openingHandler;
 		private static EventHandler<DialogBoxShowingEventArgs> dialogHandler;
@@ -33,6 +34,7 @@ namespace DynamoAutomation
 		{
 			try
 			{
+				journalChecked = false;
 				journalModeIsPermissive = false;
 				uiCtrlApp = application;
 				// This handler will be disconnected at the end of the opening trigger
@@ -56,6 +58,7 @@ namespace DynamoAutomation
 		{
 			try
 			{
+				uiCtrlApp.ControlledApplication.DocumentOpening -= openingHandler;
 				if (journalModeIsPermissive)
 				{
 					application.DialogBoxShowing -= dialogHandler;
@@ -77,14 +80,14 @@ namespace DynamoAutomation
 		private void ActivateSwallowers(object o, DocumentOpeningEventArgs e)
 		{
 			// And we'll only want to add them if the journal is actually running in permissive mode
-			if (CheckJournalingMode() )
+			if (!journalChecked && CheckJournalingMode() )
 			{
 				dialogHandler = new EventHandler<DialogBoxShowingEventArgs>(DismissAllDialogs);
 				warningsHandler = new EventHandler<FailuresProcessingEventArgs>(DismissAllWarnings);
 				uiCtrlApp.DialogBoxShowing += dialogHandler;
 				uiCtrlApp.ControlledApplication.FailuresProcessing += warningsHandler;
+				journalChecked = true;
 			}
-			uiCtrlApp.ControlledApplication.DocumentOpening -= openingHandler;
 		}
 
 		/// <summary>

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Bad Monkeys")]
 [assembly: AssemblyProduct("DynamoAutomation")]
-[assembly: AssemblyCopyright("Copyright © gmp 2017")]
+[assembly: AssemblyCopyright("Copyright © 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("492a518b-55c9-46e5-be5c-0513b6761299")]
+[assembly: Guid("A0DD9380-2ED0-4E46-BDFF-DD2209628E43")]
 
 // Version information for an assembly consists of the following four values:
 //
